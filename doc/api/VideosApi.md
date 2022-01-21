@@ -18,16 +18,19 @@ Method | HTTP request | Description
 
 <a name="delete"></a>
 ## **delete**
+Delete a video
 
+If you do not need a video any longer, you can send a request to delete it. All you need is the videoId. Tutorials using [video deletion](https://api.video/blog/endpoints/video-delete).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
-
         const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video you want to delete.
-
         // void
         const result = await client.videos.delete(videoId);
         console.log(result);
@@ -35,6 +38,7 @@ Method | HTTP request | Description
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -59,10 +63,15 @@ Name | Type | Description  | Notes
 
 <a name="get"></a>
 ## **get**
+Show a video
 
+This call provides the same JSON information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL. Tutorials using [video GET](https://api.video/blog/endpoints/video-get).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -76,6 +85,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -100,10 +110,15 @@ Name | Type | Description  | Notes
 
 <a name="getStatus"></a>
 ## **getStatus**
+Show video status
 
+This API provides upload status &amp; encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -117,6 +132,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -141,7 +157,9 @@ Name | Type | Description  | Notes
 
 <a name="list"></a>
 ## **list**
+List all videos
 
+Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below.  We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
 
 ### Example
 ```js
@@ -198,25 +216,30 @@ Name | Type | Description  | Notes
 
 <a name="update"></a>
 ## **update**
+Update a video
 
+Use this endpoint to update the parameters associated with your video. The video you are updating is determined by the video ID you provide in the path. For each parameter you want to update, include the update in the request body. NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it. Tutorials using [video update](https://api.video/blog/endpoints/video-update).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video you want to delete.
         const videoUpdatePayload = {
-			playerId: "pl4k0jvEUuaTdRAEjQ4Jfrgz", // The unique ID for the player you want to associate with your video.
-			title: "title_example", // The title you want to use for your video.
-			description: "A film about good books.", // A brief description of the video.
-			_public: true, // Whether the video is publicly available or not. False means it is set to private. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).
-			panoramic: false, // Whether the video is a 360 degree or immersive video.
-			mp4Support: true, // Whether the player supports the mp4 format.
-			tags: ["maths", "string theory", "video"], // A list of terms or words you want to tag the video with. Make sure the list includes all the tags you want as whatever you send in this list will overwrite the existing list for the video.
-			metadata: null, // A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
-		}; 
+      playerId: \"pl4k0jvEUuaTdRAEjQ4Jfrgz\", // The unique ID for the player you want to associate with your video.
+      title: \"title_example\", // The title you want to use for your video.
+      description: \"A film about good books.\", // A brief description of the video.
+      _public: true, // Whether the video is publicly available or not. False means it is set to private.
+      panoramic: false, // Whether the video is a 360 degree or immersive video.
+      mp4Support: true, // Whether the player supports the mp4 format.
+      tags: [\"maths\", \"string theory\", \"video\"], // A list of terms or words you want to tag the video with. Make sure the list includes all the tags you want as whatever you send in this list will overwrite the existing list for the video.
+      metadata: null, // A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video.
+    }; 
 
         // Video
         const result = await client.videos.update(videoId, videoUpdatePayload);
@@ -225,6 +248,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -251,26 +275,34 @@ Name | Type | Description  | Notes
 
 <a name="pickThumbnail"></a>
 ## **pickThumbnail**
+Pick a thumbnail
 
+Pick a thumbnail from the given time code. If you'd like to upload an image for your thumbnail, use the [Upload a Thumbnail](https://docs.api.video/reference#post_videos-videoid-thumbnail) endpoint. There may be a short delay for the thumbnail to update. Tutorials using [Thumbnail picking](https://api.video/blog/endpoints/video-pick-a-thumbnail).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
-    try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+  try {
+      const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
-        const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
-        const videoThumbnailPickPayload = {
-			timecode: "timecode_example", // Frame in video to be used as a placeholder before the video plays.  Example: '\"00:01:00.000\" for 1 minute into the video.' Valid Patterns:  \"hh:mm:ss.ms\" \"hh:mm:ss:frameNumber\" \"124\" (integer value is reported as seconds)  If selection is out of range, \"00:00:00.00\" will be chosen.
-		}; 
+      const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
+      const videoThumbnailPickPayload = {
+      timecode: \"timecode_example\", 
+      // Frame in video to be used as a placeholder before the video plays. 
+      //Example: '\\\"00:01:00.000\\\" for 1 minute into the video.' Valid Patterns: \\\"hh:mm:ss.ms\\\" \\\"hh:mm:ss:frameNumber\\\" \\\"124\\\" (integer value is reported as seconds) If selection is out of range, \\\"00:00:00.00\\\" will be chosen.
+  }; 
 
-        // Video
-        const result = await client.videos.pickThumbnail(videoId, videoThumbnailPickPayload);
-        console.log(result);
-    } catch (e) {
-        console.error(e);
-    }
-})();
+      // Video
+      const result = await client.videos.pickThumbnail(videoId, videoThumbnailPickPayload);
+      console.log(result);
+  } catch (e) {
+      console.error(e);
+  }
+ })();
+
 ```
 
 ### Parameters
@@ -296,24 +328,16 @@ Name | Type | Description  | Notes
 
 <a name="uploadWithUploadToken"></a>
 ## **uploadWithUploadToken**
+Upload with an upload token
+
 
 
 ### Example
 ```js
-(async () => {
-    try {
-        const client = new ApiVideoClient();
+//The upload will happen on the front end, and not on the backend code.  
+//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader) is a great place to look for uploading videos with the delegated token.
+//We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).
 
-        const token = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token you want to use to upload a video.
-        const file = 'BINARY_DATA_HERE'; // The path to the video you want to upload.
-
-        // Video
-        const result = await client.videos.uploadWithUploadToken(token, file);
-        console.log(result);
-    } catch (e) {
-        console.error(e);
-    }
-})();
 ```
 
 ### Parameters
@@ -375,35 +399,31 @@ try {
 
 <a name="create"></a>
 ## **create**
+Create a video
 
+ ## We have tutorials on: * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial) * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)   * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices) * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos) * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)  * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint. 
 
 ### Example
 ```js
-(async () => {
-    try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
+const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
+const videoCreationPayload = {
+  title: \"Maths video\", // The title of your new video.
+  description: \"A video about string theory.\", // A brief description of your video.
+  source: \"https://www.myvideo.url.com/video.mp4\", // If you add a video already on the web, this is where you enter the url for the video.
+  _public: true, // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+  panoramic: false, // Indicates if your video is a 360/immersive video.
+  mp4Support: true, // Enables mp4 version in addition to streamed version.
+  playerId: \"pl45KFKdlddgk654dspkze\", // The unique identification number for your video player.
+  tags: [\"maths\", \"string theory\", \"video\"], // A list of tags you want to use to describe your video.
+  metadata: [{\"key\": \"Author\", \"value\": \"John Doe\"}], // A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos.
+}; 
 
-        const videoCreationPayload = {
-			title: "Maths video", // The title of your new video.
-			description: "A video about string theory.", // A brief description of your video.
-			source: "https://www.myvideo.url.com/video.mp4", // If you add a video already on the web, this is where you enter the url for the video.
-			_public: true, // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).
-			panoramic: false, // Indicates if your video is a 360/immersive video.
-			mp4Support: true, // Enables mp4 version in addition to streamed version.
-			playerId: "pl45KFKdlddgk654dspkze", // The unique identification number for your video player.
-			tags: ["maths", "string theory", "video"], // A list of tags you want to use to describe your video.
-			metadata: [{"key": "Author", "value": "John Doe"}], // A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata).
-			clip: null,
-			watermark: null,
-		}; 
+// Video
+const result = await client.videos.create(videoCreationPayload);
 
-        // Video
-        const result = await client.videos.create(videoCreationPayload);
-        console.log(result);
-    } catch (e) {
-        console.error(e);
-    }
-})();
 ```
 
 ### Parameters
@@ -429,24 +449,30 @@ Name | Type | Description  | Notes
 
 <a name="upload"></a>
 ## **upload**
+Upload a video
 
+To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once. We offer 2 types of upload:  * Regular upload  * Progressive upload The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)   * allow to send a video source \"progressively\", i.e., before before knowing the total size of the video.   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as \"completely sent\" when the \"last\" chunk is sent (i.e., the chunk that \"completes\" the upload). ```bash curl https://ws.api.video/videos/{videoId}/source \\   -H 'Authorization: Bearer {access_token}' \\   -F file=@/path/to/video.mp4    ``` Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
-
-        const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter the videoId you want to use to upload your video.
-        const file = 'BINARY_DATA_HERE'; // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\"/videos\\\" endpoint and add the \\\"source\\\" parameter when you create a new video.
-
-        // Video
-        const result = await client.videos.upload(videoId, file);
-        console.log(result);
+      const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
+      
+      const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Enter the videoId you want to use to upload your video.
+      const file = 'BINARY_DATA_HERE'; // The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\\\\\"/videos\\\\\\\" endpoint and add the \\\\\\\"source\\\\\\\" parameter when you create a new video.
+      
+      // Video
+      const result = await client.videos.upload(videoId, file);
+      console.log(result);
     } catch (e) {
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -511,13 +537,18 @@ try {
 
 <a name="uploadThumbnail"></a>
 ## **uploadThumbnail**
+Upload a thumbnail
 
+The thumbnail is the poster that appears in the player window before video playback begins. This endpoint allows you to upload an image for the thumbnail. To select a still frame from the video using a time stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video.  Note: There may be a short delay before the new thumbnail is delivered to our CDN. Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const videoId = 'videoId_example'; // Unique identifier of the chosen video 
         const file = 'BINARY_DATA_HERE'; // The .jpg image to be added as a thumbnail.
@@ -529,6 +560,7 @@ try {
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -536,7 +568,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **videoId** | **string**| Unique identifier of the chosen video  | [default to undefined]
- **file** | **string**| The .jpg image to be added as a thumbnail. | [default to undefined]
+ **file** | **string**| The &#x60;.jpg&#x60; image to be added as a thumbnail. | [default to undefined]
 
 ### Return type
 [**Video**](../model/Video.md)

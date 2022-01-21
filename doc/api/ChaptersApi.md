@@ -12,10 +12,13 @@ Method | HTTP request | Description
 
 <a name="delete"></a>
 ## **delete**
-
+Delete a chapter
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -30,6 +33,7 @@ Method | HTTP request | Description
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -55,25 +59,30 @@ Name | Type | Description  | Notes
 
 <a name="list"></a>
 ## **list**
+List video chapters
 
+Retrieve a list of all chapters for a specified video.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
 
-        const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want to retrieve a list of chapters for.
-        const currentPage = '2'; // Choose the number of search results to return per page. Minimum value: 1
-        const pageSize = '30'; // Results per page. Allowed values 1-100, default is 25.
+        const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want to show a chapter for.
+        const language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
 
-        // ChaptersListResponse
-        const result = await client.chapters.list({ videoId, currentPage, pageSize })
+        // Chapter
+        const result = await client.chapters.get(videoId, language);
         console.log(result);
     } catch (e) {
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -100,10 +109,15 @@ Name | Type | Description  | Notes
 
 <a name="get"></a>
 ## **get**
+Show a chapter
 
+Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -118,6 +132,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -143,10 +158,15 @@ Name | Type | Description  | Notes
 
 <a name="upload"></a>
 ## **upload**
+Upload a chapter
 
+Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -162,6 +182,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters

@@ -15,10 +15,15 @@ Method | HTTP request | Description
 
 <a name="delete"></a>
 ## **delete**
+Delete a player
 
+Delete a player if you no longer need it. You can delete any player that you have the player ID for.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -32,6 +37,7 @@ Method | HTTP request | Description
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -56,10 +62,13 @@ Name | Type | Description  | Notes
 
 <a name="deleteLogo"></a>
 ## **deleteLogo**
-
+Delete logo
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -73,6 +82,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -97,10 +107,15 @@ Name | Type | Description  | Notes
 
 <a name="list"></a>
 ## **list**
+List all player themes
 
+Retrieve a list of all the player themes you created, as well as details about each one. Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -117,6 +132,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -144,13 +160,18 @@ Name | Type | Description  | Notes
 
 <a name="get"></a>
 ## **get**
+Show a player
 
+Use a player ID to retrieve details about the player and display it for viewers.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player you want to retrieve. 
 
@@ -161,6 +182,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -185,32 +207,36 @@ Name | Type | Description  | Notes
 
 <a name="update"></a>
 ## **update**
+Update a player
 
+Use a player ID to update specific details for a player. NOTE: It may take up to 10 min before the new player configuration is available from our CDN.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier for the player.
         const playerThemeUpdatePayload = {
-			name: "name_example", // Add a name for your player theme here.
-			text: "text_example", // RGBA color for timer text. Default: rgba(255, 255, 255, 1)
-			link: "link_example", // RGBA color for all controls. Default: rgba(255, 255, 255, 1)
-			linkHover: "linkHover_example", // RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1)
-			trackPlayed: "trackPlayed_example", // RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95)
-			trackUnplayed: "trackUnplayed_example", // RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)
-			trackBackground: "trackBackground_example", // RGBA color playback bar: background. Default: rgba(255, 255, 255, .2)
-			backgroundTop: "backgroundTop_example", // RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)
-			backgroundBottom: "backgroundBottom_example", // RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7)
-			backgroundText: "backgroundText_example", // RGBA color for title text. Default: rgba(255, 255, 255, 1)
-			enableApi: true, // enable/disable player SDK access. Default: true
-			enableControls: true, // enable/disable player controls. Default: true
-			forceAutoplay: true, // enable/disable player autoplay. Default: false
-			hideTitle: true, // enable/disable title. Default: false
-			forceLoop: true, // enable/disable looping. Default: false
-		}; 
+      text: \"text_example\", // RGBA color for timer text. Default: rgba(255, 255, 255, 1)
+      link: \"link_example\", // RGBA color for all controls. Default: rgba(255, 255, 255, 1)
+      linkHover: \"linkHover_example\", // RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1)
+      trackPlayed: \"trackPlayed_example\", // RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95)
+      trackUnplayed: \"trackUnplayed_example\", // RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)
+      trackBackground: \"trackBackground_example\", // RGBA color playback bar: background. Default: rgba(255, 255, 255, .2)
+      backgroundTop: \"backgroundTop_example\", // RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)
+      backgroundBottom: \"backgroundBottom_example\", // RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7)
+      backgroundText: \"backgroundText_example\", // RGBA color for title text. Default: rgba(255, 255, 255, 1)
+      enableApi: true, // enable/disable player SDK access. Default: true
+      enableControls: true, // enable/disable player controls. Default: true
+      forceAutoplay: true, // enable/disable player autoplay. Default: false
+      hideTitle: true, // enable/disable title. Default: false
+      forceLoop: true, // enable/disable looping. Default: false
+    }; 
 
         // PlayerTheme
         const result = await client.playerThemes.update(playerId, playerThemeUpdatePayload);
@@ -219,6 +245,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -244,31 +271,35 @@ Name | Type | Description  | Notes
 
 <a name="create"></a>
 ## **create**
+Create a player
 
+Create a player for your video, and customise it.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const playerThemeCreationPayload = {
-			name: "name_example", // Add a name for your player theme here.
-			text: "text_example", // RGBA color for timer text. Default: rgba(255, 255, 255, 1)
-			link: "link_example", // RGBA color for all controls. Default: rgba(255, 255, 255, 1)
-			linkHover: "linkHover_example", // RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1)
-			trackPlayed: "trackPlayed_example", // RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95)
-			trackUnplayed: "trackUnplayed_example", // RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)
-			trackBackground: "trackBackground_example", // RGBA color playback bar: background. Default: rgba(255, 255, 255, .2)
-			backgroundTop: "backgroundTop_example", // RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)
-			backgroundBottom: "backgroundBottom_example", // RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7)
-			backgroundText: "backgroundText_example", // RGBA color for title text. Default: rgba(255, 255, 255, 1)
-			enableApi: true, // enable/disable player SDK access. Default: true
-			enableControls: true, // enable/disable player controls. Default: true
-			forceAutoplay: true, // enable/disable player autoplay. Default: false
-			hideTitle: true, // enable/disable title. Default: false
-			forceLoop: true, // enable/disable looping. Default: false
-		}; 
+      text: \"text_example\", // RGBA color for timer text. Default: rgba(255, 255, 255, 1)
+      link: \"link_example\", // RGBA color for all controls. Default: rgba(255, 255, 255, 1)
+      linkHover: \"linkHover_example\", // RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1)
+      trackPlayed: \"trackPlayed_example\", // RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95)
+      trackUnplayed: \"trackUnplayed_example\", // RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)
+      trackBackground: \"trackBackground_example\", // RGBA color playback bar: background. Default: rgba(255, 255, 255, .2)
+      backgroundTop: \"backgroundTop_example\", // RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7)
+      backgroundBottom: \"backgroundBottom_example\", // RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7)
+      backgroundText: \"backgroundText_example\", // RGBA color for title text. Default: rgba(255, 255, 255, 1)
+      enableApi: true, // enable/disable player SDK access. Default: true
+      enableControls: true, // enable/disable player controls. Default: true
+      forceAutoplay: true, // enable/disable player autoplay. Default: false
+      hideTitle: true, // enable/disable title. Default: false
+      forceLoop: true, // enable/disable looping. Default: false
+    }; 
 
         // PlayerTheme
         const result = await client.playerThemes.create(playerThemeCreationPayload);
@@ -277,6 +308,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -300,10 +332,15 @@ Name | Type | Description  | Notes
 
 <a name="uploadLogo"></a>
 ## **uploadLogo**
+Upload a logo
 
+The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -319,6 +356,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters

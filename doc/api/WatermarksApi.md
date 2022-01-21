@@ -11,7 +11,9 @@ Method | HTTP request | Description
 
 <a name="delete"></a>
 ## **delete**
+Delete a watermark
 
+Delete a watermark. A watermark is a static image, directly burnt-into a video.
 
 ### Example
 ```js
@@ -52,7 +54,9 @@ Name | Type | Description  | Notes
 
 <a name="list"></a>
 ## **list**
+List all watermarks
 
+List all watermarks. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
 
 ### Example
 ```js
@@ -99,30 +103,46 @@ Name | Type | Description  | Notes
 
 <a name="upload"></a>
 ## **upload**
+Upload a watermark
 
+Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
-        const file = 'BINARY_DATA_HERE'; // The .jpg or .png image to be added as a watermark.
+        // Upload a watermark
+        const watermark = await client.watermarks.upload('test/data/test.jpg');
+        
+        // create a video with watermark
+        const watermarkVideo = await client.videos.create({
+          title: 'Nodejs - watermark',
+          watermark: {
+            id: watermark.watermarkId,
+            top: '0px',
+            left: '0px',
+            width: '100px',
+            height: '100px',
+          },
+        });
 
-        // Watermark
-        const result = await client.watermarks.upload(file);
-        console.log(result);
     } catch (e) {
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **file** | **string**| The .jpg or .png image to be added as a watermark. | [default to undefined]
+ **file** | **string**| The &#x60;.jpg&#x60; or &#x60;.png&#x60; image to be added as a watermark. | [default to undefined]
 
 ### Return type
 [**Watermark**](../model/Watermark.md)

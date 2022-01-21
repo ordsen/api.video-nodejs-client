@@ -12,10 +12,15 @@ Method | HTTP request | Description
 
 <a name="delete"></a>
 ## **delete**
+Delete a Webhook
 
+This endpoint will delete the indicated webhook.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -29,6 +34,7 @@ Method | HTTP request | Description
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -53,10 +59,15 @@ Name | Type | Description  | Notes
 
 <a name="get"></a>
 ## **get**
+Show Webhook details
 
+This call provides the same JSON information provided on Webjhook creation.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -70,6 +81,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -93,10 +105,15 @@ Name | Type | Description  | Notes
 
 <a name="list"></a>
 ## **list**
+List all webhooks
 
+Requests to this endpoint return a list of your webhooks (with all their details). You can filter what the webhook list that the API returns using the parameters described below.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -112,6 +129,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -137,18 +155,23 @@ Name | Type | Description  | Notes
 
 <a name="create"></a>
 ## **create**
+Create Webhook
 
+Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer four events:  * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \\\"type\\\": \\\"video.encoding.quality.completed\\\", \\\"emittedAt\\\": \\\"2021-01-29T16:46:25.217+01:00\\\", \\\"videoId\\\": \\\"viXXXXXXXX\\\", \\\"encoding\\\": \\\"hls\\\", \\\"quality\\\": \\\"720p\\\"} ```. This request says that the 720p HLS encoding was completed. * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires. * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true. * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const webhooksCreationPayload = {
-			events: ["video.encoding.quality.completed"], // A list of the webhooks that you are subscribing to. There are Currently four webhook options: * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \\\"type\\\": \\\"video.encoding.quality.completed\\\", \\\"emittedAt\\\": \\\"2021-01-29T16:46:25.217+01:00\\\", \\\"videoId\\\": \\\"viXXXXXXXX\\\", \\\"encoding\\\": \\\"hls\\\", \\\"quality\\\": \\\"720p\\\"} ```. This request says that the 720p HLS encoding was completed. * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires. * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true. * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
-			url: "https://example.com/webhooks", // The the url to which HTTP notifications are sent. It could be any http or https URL.
-		}; 
+      events: [\"video.encoding.quality.completed\"], // A list of the webhooks that you are subscribing to. There are Currently four webhook options: * ```video.encoding.quality.completed```  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \\\\\\\"type\\\\\\\": \\\\\\\"video.encoding.quality.completed\\\\\\\", \\\\\\\"emittedAt\\\\\\\": \\\\\\\"2021-01-29T16:46:25.217+01:00\\\\\\\", \\\\\\\"videoId\\\\\\\": \\\\\\\"viXXXXXXXX\\\\\\\", \\\\\\\"encoding\\\\\\\": \\\\\\\"hls\\\\\\\", \\\\\\\"quality\\\\\\\": \\\\\\\"720p\\\\\\\"} ```. This request says that the 720p HLS encoding was completed. * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires. * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true. * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
+      url: \"https://example.com/webhooks\", // The the url to which HTTP notifications are sent. It could be any http or https URL.
+    }; 
 
         // Webhook
         const result = await client.webhooks.create(webhooksCreationPayload);
@@ -157,6 +180,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters

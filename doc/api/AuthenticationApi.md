@@ -10,25 +10,15 @@ Method | HTTP request | Description
 
 <a name="authenticate"></a>
 ## **authenticate**
+Authenticate
 
+To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication. All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
 
 ### Example
 ```js
-(async () => {
-    try {
-        const client = new ApiVideoClient();
+//With the api.video API clients, authentication is taken care of with each client created.
+// You get to skip this step!
 
-        const authenticatePayload = {
-			apiKey: "apiKey_example", // Your account API key. You can use your sandbox API key, or you can use your production API key.
-		}; 
-
-        // AccessToken
-        const result = await client.authentication.authenticate(authenticatePayload);
-        console.log(result);
-    } catch (e) {
-        console.error(e);
-    }
-})();
 ```
 
 ### Parameters
@@ -53,25 +43,15 @@ Name | Type | Description  | Notes
 
 <a name="refresh"></a>
 ## **refresh**
+Refresh token
 
+Use the refresh endpoint with the refresh token you received when you first authenticated using the api-key endpoint. Send the refresh token in the body of your request. The api.video API returns a new access token that is valid for one hour (3600 seconds) and a new refresh token.  
 
 ### Example
 ```js
-(async () => {
-    try {
-        const client = new ApiVideoClient();
+//With the api.video API clients, authentication is taken care of with each client created.
+// You get to skip this step!
 
-        const refreshTokenPayload = {
-			refreshToken: "refreshToken_example", // The refresh token is either the first refresh token you received when you authenticated with the auth/api-key endpoint, or it's the refresh token from the last time you used the auth/refresh endpoint. Place this in the body of your request to obtain a new access token (which is valid for an hour) and a new refresh token. 
-		}; 
-
-        // AccessToken
-        const result = await client.authentication.refresh(refreshTokenPayload);
-        console.log(result);
-    } catch (e) {
-        console.error(e);
-    }
-})();
 ```
 
 ### Parameters

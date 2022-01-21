@@ -15,10 +15,13 @@ Method | HTTP request | Description
 
 <a name="delete"></a>
 ## **delete**
-
+Delete a live stream
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -32,6 +35,7 @@ Method | HTTP request | Description
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -55,13 +59,18 @@ Name | Type | Description  | Notes
 
 <a name="deleteThumbnail"></a>
 ## **deleteThumbnail**
+Delete a thumbnail
 
+Send the unique identifier for a live stream to delete it from the system.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique identifier for the live stream you want to delete. 
 
@@ -72,6 +81,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -96,10 +106,15 @@ Name | Type | Description  | Notes
 
 <a name="list"></a>
 ## **list**
+List all live streams
 
+With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -118,6 +133,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -146,10 +162,15 @@ Name | Type | Description  | Notes
 
 <a name="get"></a>
 ## **get**
+Show live stream
 
+Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -163,6 +184,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -186,21 +208,26 @@ Name | Type | Description  | Notes
 
 <a name="update"></a>
 ## **update**
+Update a live stream
 
+Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream). NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream.    The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
         const liveStreamUpdatePayload = {
-			name: "My Live Stream Video", // The name you want to use for your live stream.
-			_public: true, // BETA FEATURE Please limit all public = false (\"private\") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
-			record: true, // Use this to indicate whether you want the recording on or off. On is true, off is false.
-			playerId: "pl45KFKdlddgk654dspkze", // The unique ID for the player associated with a live stream that you want to update.
-		}; 
+      name: \"My Live Stream Video\", // The name you want to use for your live stream.
+      _public: true, // BETA FEATURE Please limit all public = false (\\\"private\\\") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+      record: true, // Use this to indicate whether you want the recording on or off. On is true, off is false.
+      playerId: \"pl45KFKdlddgk654dspkze\", // The unique ID for the player associated with a live stream that you want to update.
+    }; 
 
         // LiveStream
         const result = await client.liveStreams.update(liveStreamId, liveStreamUpdatePayload);
@@ -209,6 +236,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -234,20 +262,25 @@ Name | Type | Description  | Notes
 
 <a name="create"></a>
 ## **create**
+Create live stream
 
+A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.  The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer. See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS. Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey} Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
-        const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
+        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\" });
 
         const liveStreamCreationPayload = {
-			name: "My Live Stream Video", // Add a name for your live stream here.
-			record: true, // Whether you are recording or not. True for record, false for not record.
-			_public: true, // BETA FEATURE Please limit all public = false (\"private\") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
-			playerId: "pl4f4ferf5erfr5zed4fsdd", // The unique identifier for the player.
-		}; 
+      name: \"My Live Stream Video\", // Add a name for your live stream here.
+      record: true, // Whether you are recording or not. True for record, false for not record.
+      _public: true, // BETA FEATURE Please limit all public = false (\\\"private\\\") livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+      playerId: \"pl4f4ferf5erfr5zed4fsdd\", // The unique identifier for the player.
+    }; 
 
         // LiveStream
         const result = await client.liveStreams.create(liveStreamCreationPayload);
@@ -256,6 +289,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -280,10 +314,15 @@ Name | Type | Description  | Notes
 
 <a name="uploadThumbnail"></a>
 ## **uploadThumbnail**
+Upload a thumbnail
 
+Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
 
 ### Example
 ```js
+//install the module with npm or yarn
+//npm install @api.video/nodejs-client --save
+//yarn add @api.video/nodejs-client
 (async () => {
     try {
         const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
@@ -298,6 +337,7 @@ Name | Type | Description  | Notes
         console.error(e);
     }
 })();
+
 ```
 
 ### Parameters
@@ -305,7 +345,7 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **liveStreamId** | **string**| The unique ID for the live stream you want to upload. | [default to undefined]
- **file** | **string**| The .jpg image to be added as a thumbnail. | [default to undefined]
+ **file** | **string**| The &#x60;.jpg&#x60; image to be added as a thumbnail. | [default to undefined]
 
 ### Return type
 [**LiveStream**](../model/LiveStream.md)
