@@ -4,6 +4,7 @@
     "baseUrl": "src",
     "declaration": true,
     "outDir": "./lib",
+    "target": "es2017",
   },
   "include": [
     "./src"
